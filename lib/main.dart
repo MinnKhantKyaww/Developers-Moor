@@ -9,9 +9,8 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final appDatabase = AppDatabase();
     return Provider(
-      builder: (_) =>  appDatabase.developersDao ,
+      builder: (_) =>  AppDatabase().developersDao,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Developers Moor',

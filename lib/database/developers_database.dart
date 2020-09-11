@@ -39,12 +39,12 @@ class DevelopersDao extends DatabaseAccessor<AppDatabase>
               return tbl.name.like("$name%");
             }
 
-            if(heading != null && heading.isNotEmpty) {
+            if(heading != null || heading.isNotEmpty) {
              return tbl.heading.equals(heading);
             }
 
-            if(heading != null && heading.isNotEmpty && name != null && name.isNotEmpty) {
-              return tbl.name.like("$name%");
+            if(heading != null || heading.isNotEmpty && name != null || name.isNotEmpty) {
+              return tbl.name.like("$name%") & tbl.heading.equals(heading);
             }
 
             return null;

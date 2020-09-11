@@ -15,7 +15,6 @@ const languages = [
 ];
 
 bool onChange = false;
-String nameValue;
 
 void saveDeveloper(
     BuildContext context, DevelopersDao developersDao, Developer developer) {
@@ -82,10 +81,9 @@ class _HomePageState extends State<HomePage> {
             child: TextField(
               controller: _searchController,
               onChanged: (value) {
-                setState(() {
+            //    setState(() {
                   value.isEmpty ? onChange = false : onChange = true;
-                  nameValue = value;
-                });
+              //  });
                   developersDao.watchAllFiltersDevelopers(name: value);
               },
               cursorColor: Colors.black,
@@ -124,7 +122,7 @@ class _HomePageState extends State<HomePage> {
             selectedColor: Theme.of(context).primaryColor,
             onSelected: (selected) {
               setState(() {
-                _heading = selected ? languages[index] : null;
+                _heading = selected ? languages[index] : "";
               });
               _heading != null && _heading.isNotEmpty ? onChange = true : onChange = false;
               developerDao.watchAllFiltersDevelopers(heading: _heading);
@@ -227,7 +225,7 @@ class _HomePageState extends State<HomePage> {
       appBar: _buildAppBar(context),
       body: StreamBuilder(
         stream: onChange
-            ? developersDao.watchAllFiltersDevelopers(name: nameValue, heading: _heading)
+            ? developersDao.watchAllFiltersDevelopers(name: _searchController.text, heading: _heading)
             : developersDao.watchAllDevelopers(),
         builder: (context, AsyncSnapshot<List<Developer>> snapshot) {
           final developers = snapshot.data ?? List();
