@@ -24,11 +24,7 @@ void saveDeveloper(
     ),
   );
 
-  Navigator.push(context, route).then((result) {
-    if (result) {
-      developersDao.watchAllDevelopers();
-    }
-  });
+  Navigator.push(context, route);
 }
 
 class HomePage extends StatefulWidget {
@@ -76,12 +72,13 @@ class _HomePageState extends State<HomePage> {
             child: TextField(
               controller: _searchController,
               onChanged: (value) {
-                    setState(() {
-                value.isEmpty ? onChange = false : onChange = true;
-                  });
+                setState(() {
+                  value.isEmpty ? onChange = false : onChange = true;
+                });
                 developersDao.watchAllFiltersDevelopers(name: value);
               },
               cursorColor: Colors.black,
+              autofocus: false,
               decoration: InputDecoration.collapsed(
                 hintText: "Search...",
                 filled: true,
