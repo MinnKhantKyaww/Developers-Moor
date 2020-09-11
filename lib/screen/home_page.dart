@@ -75,14 +75,14 @@ class _HomePageState extends State<HomePage> {
                 setState(() {
                   value.isEmpty ? onChange = false : onChange = true;
                 });
-                developersDao.watchAllFiltersDevelopers(name: value);
+                //developersDao.watchAllFiltersDevelopers(name: value);
               },
               cursorColor: Colors.black,
               autofocus: false,
               decoration: InputDecoration.collapsed(
                 hintText: "Search...",
                 filled: true,
-                fillColor: Colors.white,
+                fillColor: Colors.transparent,
               ),
             ),
           )
@@ -119,7 +119,7 @@ class _HomePageState extends State<HomePage> {
               _heading != null && _heading.isNotEmpty
                   ? onChange = true
                   : onChange = false;
-              developerDao.watchAllFiltersDevelopers(heading: _heading);
+              //developerDao.watchAllFiltersDevelopers(heading: _heading);
             },
           );
         },
