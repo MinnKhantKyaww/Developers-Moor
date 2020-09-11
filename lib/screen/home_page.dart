@@ -32,15 +32,11 @@ void saveDeveloper(
 }
 
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-
-
-
   TextEditingController _searchController;
 
   String _heading;
@@ -57,17 +53,16 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-
   Widget _buildSearchTextField(BuildContext context) {
-
     final developersDao = Provider.of<DevelopersDao>(context);
 
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
       decoration: ShapeDecoration(
           color: Colors.white,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          )),
       child: Row(
         children: [
           Icon(
@@ -81,10 +76,10 @@ class _HomePageState extends State<HomePage> {
             child: TextField(
               controller: _searchController,
               onChanged: (value) {
-            //    setState(() {
-                  value.isEmpty ? onChange = false : onChange = true;
-              //  });
-                  developersDao.watchAllFiltersDevelopers(name: value);
+                    setState(() {
+                value.isEmpty ? onChange = false : onChange = true;
+                  });
+                developersDao.watchAllFiltersDevelopers(name: value);
               },
               cursorColor: Colors.black,
               decoration: InputDecoration.collapsed(
@@ -124,7 +119,9 @@ class _HomePageState extends State<HomePage> {
               setState(() {
                 _heading = selected ? languages[index] : "";
               });
-              _heading != null && _heading.isNotEmpty ? onChange = true : onChange = false;
+              _heading != null && _heading.isNotEmpty
+                  ? onChange = true
+                  : onChange = false;
               developerDao.watchAllFiltersDevelopers(heading: _heading);
             },
           );
@@ -225,7 +222,8 @@ class _HomePageState extends State<HomePage> {
       appBar: _buildAppBar(context),
       body: StreamBuilder(
         stream: onChange
-            ? developersDao.watchAllFiltersDevelopers(name: _searchController.text, heading: _heading)
+            ? developersDao.watchAllFiltersDevelopers(
+                name: _searchController.text, heading: _heading)
             : developersDao.watchAllDevelopers(),
         builder: (context, AsyncSnapshot<List<Developer>> snapshot) {
           final developers = snapshot.data ?? List();
