@@ -118,6 +118,14 @@ class _DeveloperEditPageState extends State<DeveloperEditPage> {
   }
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    _ageController.dispose();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     final developersDao = Provider.of<DevelopersDao>(context);
 
